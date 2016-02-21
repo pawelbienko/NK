@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying pages
  *
@@ -7,14 +8,16 @@
  * other "pages" on your WordPress site will use a different template.
  *
 /*
-
+Template Name: scheduler
 */
 
 get_header(); ?>
 
-	<div id="primary" class="container">
-            <p>Witaj na stronie ! :)</p>
-<?php
+<div id="primary" class="container">
+    <main id="main" class="site-main" role="main">
+            
+    <?php
+
     if (is_user_logged_in()){
         if(isset($_GET['day'])){
             $day   = $_GET['day'];
@@ -23,6 +26,8 @@ get_header(); ?>
             $date  = $year.'-'.$month.'-'.$day;
             
             $user_ID = get_current_user_id();
+            echo $user_ID;
+
 
             global $wpdb;
             $customers = $wpdb->get_results("SELECT * FROM school_teachers;");
@@ -59,9 +64,15 @@ get_header(); ?>
                     </tbody>
                 </table>
         <?php
+        }else{   
+            $calendar = new Calendar();
+            echo $calendar->show();
         }
-    }
-        ?>            
-	</div><!-- .content-area -->
+    }    
+    ?>
+    </main><!-- .site-main -->
 
+</div><!-- .content-area -->
 <?php get_footer(); ?>
+
+
