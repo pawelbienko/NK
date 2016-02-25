@@ -10,12 +10,12 @@
 
 */
 
-get_header(); ?>
-
+    if (is_user_logged_in()){
+        get_header(); 
+?>
 	<div id="primary" class="container">
             <p>Witaj na stronie ! :)</p>
 <?php
-    if (is_user_logged_in()){
         if(isset($_GET['day'])){
             $day   = $_GET['day'];
             $month = $_GET['month'];
@@ -58,10 +58,17 @@ get_header(); ?>
             ?>        
                     </tbody>
                 </table>
+            
         <?php
         }
-    }
-        ?>            
-	</div><!-- .content-area -->
+        ?>
+         </div><!-- .content-area -->
 
-<?php get_footer(); ?>
+    <?php get_footer();
+         
+    }else{
+    ?>
+       <h1><a href="<?php echo esc_url( home_url( '//wp-login.php' ) ); ?>" >Zaloguj</a></h1>
+       <?php
+    }
+?>     	
