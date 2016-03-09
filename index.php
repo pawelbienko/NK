@@ -10,33 +10,39 @@
 
 */
 
-    if (is_user_logged_in()){
-        get_header(); 
+get_header(); 
 ?>
-	<div id="primary" class="container">
-            <p>Witaj na stronie ! :)</p>
-<?php
+    <div class="jumbotron">
+        <h3 class="text-muted">Witaj na stronie ! :)</h3>
+    </div>
+
+    <div class="row">      
+        <?php
         if(isset($_GET['day'])){
             $day   = $_GET['day'];
             $month = $_GET['month'];
             $year  = $_GET['year'];
             $date  = $year.'-'.$month.'-'.$day;
-            
+
             $user_ID = get_current_user_id();
 
             global $wpdb;
-            $customers = $wpdb->get_results("SELECT * FROM school_teachers;");
+            $rowsTeachers = $wpdb->get_results("SELECT u.ID as id, user_login as name
+                                        FROM `wp_users` as u
+                                        LEFT JOIN `wp_usermeta` as m 
+                                        ON u.ID = m.user_id
+                                        WHERE m.meta_value LIKE '%teacher_role%'"
+            );
 
 
-            $rowsScheduler = $wpdb->get_results("SELECT sch.id, sub.name as subject, tea.name as teacher, cla.name as class, lesson, class_room 
-                                                FROM
-                                                school_scheduler as sch 
-                                                LEFT JOIN school_class as cla ON sch.class = cla.id 
-                                                LEFT JOIN school_teachers as tea ON sch.teacher = tea.id
-                                                LEFT JOIN school_subjects as sub ON sch.subject = sub.id
-                                                WHERE subject_date = '$date'
-                                                "
-                    );
+            $rowsScheduler = $wpdb->get_results("SELECT sch.id, sub.name as subject, tea.display_name as teacher, cla.name as class, lesson, class_room 
+                                            FROM
+                                            school_scheduler as sch 
+                                            LEFT JOIN school_class as cla ON sch.class = cla.id 
+                                            LEFT JOIN wp_users as tea ON sch.teacher = tea.id
+                                            LEFT JOIN school_subjects as sub ON sch.subject = sub.id 
+                                            WHERE subject_date = '$date' ORDER BY class ASC"
+            );
             ?>
                 <table class="table">
                     <thead>
@@ -58,17 +64,11 @@
             ?>        
                     </tbody>
                 </table>
-            
+
         <?php
         }
         ?>
-         </div><!-- .content-area -->
+     </div><!-- .content-area -->
 
-    <?php get_footer();
-         
-    }else{
-    ?>
-       <h1><a href="<?php echo esc_url( home_url( '//wp-login.php' ) ); ?>" >Zaloguj</a></h1>
-       <?php
-    }
+<?php get_footer();
 ?>     	

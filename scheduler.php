@@ -17,8 +17,8 @@ get_header(); ?>
     <main id="main" class="site-main" role="main">
             
     <?php
-
     if (is_user_logged_in()){
+
         if(isset($_GET['day'])){
             $day   = $_GET['day'];
             $month = $_GET['month'];
@@ -30,18 +30,22 @@ get_header(); ?>
 
 
             global $wpdb;
-            $customers = $wpdb->get_results("SELECT * FROM school_teachers;");
+            $rowsTeachers = $wpdb->get_results("SELECT u.ID as id, user_login as name
+                                        FROM `wp_users` as u
+                                        LEFT JOIN `wp_usermeta` as m 
+                                        ON u.ID = m.user_id
+                                        WHERE m.meta_value LIKE '%teacher_role%'");
 
 
-            $rowsScheduler = $wpdb->get_results("SELECT sch.id, sub.name as subject, tea.name as teacher, cla.name as class, lesson, class_room 
-                                                FROM
-                                                school_scheduler as sch 
-                                                LEFT JOIN school_class as cla ON sch.class = cla.id 
-                                                LEFT JOIN school_teachers as tea ON sch.teacher = tea.id
-                                                LEFT JOIN school_subjects as sub ON sch.subject = sub.id
-                                                WHERE subject_date = '$date'
-                                                "
-                    );
+            $rowsScheduler = $wpdb->get_results("SELECT sch.id, sub.name as subject, tea.display_name as teacher, cla.name as class, lesson, class_room 
+                                            FROM
+                                            school_scheduler as sch 
+                                            LEFT JOIN school_class as cla ON sch.class = cla.id 
+                                            LEFT JOIN wp_users as tea ON sch.teacher = tea.id
+                                            LEFT JOIN school_subjects as sub ON sch.subject = sub.id 
+                                            WHERE subject_date = '$date' ORDER BY class ASC"
+            );
+            
             ?>
                 <table class="table">
                     <thead>
