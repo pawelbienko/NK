@@ -16,7 +16,7 @@ get_header(); ?>
 <?php
 $user_ID = get_current_user_id();
 $id_student = $wpdb->get_var("SELECT id FROM school_students WHERE guardian = $user_ID");
-
+echo $id_student;
 if($id_student != 0){
 $rows = $wpdb->get_results("SELECT
                             id, id_student, mark, id_lesson, date_time 

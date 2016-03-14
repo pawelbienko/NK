@@ -25,15 +25,9 @@ get_header();
             $date  = $year.'-'.$month.'-'.$day;
 
             $user_ID = get_current_user_id();
-
+//echo $user_ID;
             global $wpdb;
-            $rowsTeachers = $wpdb->get_results("SELECT u.ID as id, user_login as name
-                                        FROM `wp_users` as u
-                                        LEFT JOIN `wp_usermeta` as m 
-                                        ON u.ID = m.user_id
-                                        WHERE m.meta_value LIKE '%teacher_role%'"
-            );
-
+            $id_class      = $wpdb->get_results("select id_class from `school_students` where guardian = '$user_ID'");
 
             $rowsScheduler = $wpdb->get_results("SELECT sch.id, sub.name as subject, tea.display_name as teacher, cla.name as class, lesson, class_room 
                                             FROM
@@ -41,7 +35,7 @@ get_header();
                                             LEFT JOIN school_class as cla ON sch.class = cla.id 
                                             LEFT JOIN wp_users as tea ON sch.teacher = tea.id
                                             LEFT JOIN school_subjects as sub ON sch.subject = sub.id 
-                                            WHERE subject_date = '$date' ORDER BY class ASC"
+                                            WHERE subject_date = '$date' AND cla.id = " . $id_class[0]->id_class ." ORDER BY class ASC"
             );
             ?>
                 <table class="table">
