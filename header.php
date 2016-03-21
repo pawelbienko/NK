@@ -9,6 +9,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+<title>Wirtualna Szkoła</title>    
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 
