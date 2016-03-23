@@ -12,9 +12,6 @@
 
 get_header(); 
 ?>
-    <div class="jumbotron">
-        <h3 class="text-muted">Witaj na stronie ! :)</h3>
-    </div>
 
     <div class="row">      
         <?php
@@ -59,6 +56,12 @@ get_header();
                     </tbody>
                 </table>
 
+        <?php
+        } else {
+        ?>    
+             <div class="jumbotron">
+                <h3 class="text-muted">Witaj w Wirtualnym dzienniku ! :)</h3>
+            </div>
         <?php
         }
         ?>

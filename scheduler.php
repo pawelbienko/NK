@@ -15,13 +15,14 @@ get_header(); ?>
 
 <div id="primary" class="container">
     <main id="main" class="site-main" role="main">
-            
-    <?php
-    if (is_user_logged_in()){
-        $calendar = new Calendar();
-        echo $calendar->show();
-    }    
-    ?>
+        <div class="container">        
+            <?php
+            if (is_user_logged_in()){
+                $calendar = new Calendar();
+                echo $calendar->show();
+            }    
+            ?>
+        </div>    
     </main><!-- .site-main -->
 
 </div><!-- .content-area -->

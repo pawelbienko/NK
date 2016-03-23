@@ -29,7 +29,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 <body <?php body_class(); ?> >
 <div class="container">
-    <div class="masthead">
+    <div class="masthead" style="margin-bottom: 20px">
         <nav>
             <?php
                     wp_nav_menu( array(
