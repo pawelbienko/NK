@@ -13,19 +13,21 @@ Template Name: scheduler
 
 get_header(); ?>
 
-<div id="primary" class="container">
-    <main id="main" class="site-main" role="main">
-        <div class="container">        
-            <?php
-            if (is_user_logged_in()){
-                $calendar = new Calendar();
-                echo $calendar->show();
-            }    
-            ?>
+<!--<div id="primary" class="container">-->
+<!--    <main id="main" class="site-main" role="main">-->
+        <div class="panel panel-default">
+            <div class="panel-body">       
+                <?php
+                if (is_user_logged_in()){
+                    $calendar = new Calendar();
+                    echo $calendar->show();
+                }    
+                ?>
+            </div>    
         </div>    
-    </main><!-- .site-main -->
+<!--    </main> .site-main -->
+<?php get_footer();?>
 
 </div><!-- .content-area -->
-<?php get_footer();
 
 

@@ -28,18 +28,17 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 </head>
 
 <body <?php body_class(); ?> >
-<div class="container">
-    <div class="masthead" style="margin-bottom: 20px">
-        <nav>
-            <?php
-                    wp_nav_menu( array(
-                    'menu'       => 'primary',
-                    'depth'      => 2,
-                    'container'  => false,
-                    'menu_class' => 'nav nav-justified',
-                    'walker'     => new wp_bootstrap_navwalker())
-                );
-            ?>
-        </nav>
-    </div>
+    <div class="container">
+        <div class="masthead" style="margin-bottom: 20px">
+
+                <?php
+                        wp_nav_menu( array(
+                        'menu'       => 'primary',
+                        'depth'      => 2,
+                        'container'  => false,
+                        'menu_class' => 'nav nav-tabs nav-justified',
+                        'walker'     => new wp_bootstrap_navwalker())
+                    );
+                ?>
+        </div>
 
