@@ -19,7 +19,7 @@ get_header(); ?>
             <div class="panel-body">       
                 <?php
                 if (is_user_logged_in()){
-                    $calendar = new Calendar();
+                    $calendar = new CalendarTheme();
                     echo $calendar->show();
                 }    
                 ?>

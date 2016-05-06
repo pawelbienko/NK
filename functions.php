@@ -1,5 +1,6 @@
 <?php
 include 'wp_bootstrap_navwalker.php';
+include 'calendarTheme.php';
 
 register_nav_menu( 'primary', 'Main menu' );
 
